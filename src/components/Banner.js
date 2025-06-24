@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, memo } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import avatar from "../assets/img/avatar.jpg";
 import { ArrowRightCircle } from "react-bootstrap-icons";
@@ -6,7 +6,7 @@ import "animate.css";
 import TrackVisibility from "react-on-screen";
 import git from "../assets/img/git.svg";
 
-export const Banner = () => {
+export const Banner = memo(() => {
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState("");
@@ -15,17 +15,7 @@ export const Banner = () => {
   const toRotate = ["I'm Yusif", "I'm a Software", "And", "Mobile Developer"];
   const period = 1000;
 
-  useEffect(() => {
-    let ticker = setInterval(() => {
-      tick();
-    }, delta);
-
-    return () => {
-      clearInterval(ticker);
-    };
-  }, [text]);
-
-  const tick = () => {
+  const tick = useCallback(() => {
     let i = loopNum % toRotate.length;
     let fullText = toRotate[i];
     let updatedText = isDeleting
@@ -50,7 +40,28 @@ export const Banner = () => {
     } else {
       setIndex((prevIndex) => prevIndex + 1);
     }
-  };
+  }, [loopNum, isDeleting, text.length, toRotate, period]);
+
+  useEffect(() => {
+    let ticker = setInterval(() => {
+      tick();
+    }, delta);
+
+    return () => {
+      clearInterval(ticker);
+    };
+  }, [text, tick, delta]);
+
+  const handleWhatsAppClick = useCallback(() => {
+    const phoneNumber = "+34672012922";
+    const message = "Hi! I saw your portfolio and I'd like to connect.";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank");
+  }, []);
+
+  const handleGitClick = useCallback(() => {
+    window.open("https://github.com/mahirliy55", "_blank");
+  }, []);
 
   const handleWhatsAppClick = () => {
     const phoneNumber = "+34672012922";
@@ -90,6 +101,7 @@ export const Banner = () => {
                 UI/UX design, and building robust digital solutions that deliver
                 exceptional user experiences.
               </p>
+
               <button
                 onClick={handleWhatsAppClick}
                 aria-label="Connect via WhatsApp"
@@ -102,6 +114,7 @@ export const Banner = () => {
                 }}
               >
                 Let's Connect <ArrowRightCircle size={25} aria-hidden="true" />
+
               </button>
             </div>
           </Col>
@@ -126,6 +139,7 @@ export const Banner = () => {
                 role="button"
                 tabIndex={0}
                 aria-label="Visit GitHub profile"
+
                 style={{
                   position: "absolute",
                   bottom: "10px",
@@ -141,4 +155,4 @@ export const Banner = () => {
       </Container>
     </section>
   );
-};
+});
