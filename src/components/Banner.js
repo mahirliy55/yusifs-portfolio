@@ -52,6 +52,19 @@ export const Banner = () => {
     }
   };
 
+  const handleWhatsAppClick = () => {
+    const phoneNumber = "+34672012922";
+    const message = "Hi! I saw your portfolio and I'd like to connect.";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
+  const handleGitClick = () => {
+    window.open("https://github.com/mahirliy55", "_blank");
+  };
+
   return (
     <section className="banner" id="home">
       <Container>
@@ -78,17 +91,17 @@ export const Banner = () => {
                 exceptional user experiences.
               </p>
               <button
-                onClick={() => {
-                  const phoneNumber = "+34672012922";
-                  const message =
-                    "Hi! I saw your portfolio and I'd like to connect.";
-                  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-                    message
-                  )}`;
-                  window.open(whatsappUrl, "_blank");
+                onClick={handleWhatsAppClick}
+                aria-label="Connect via WhatsApp"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    handleWhatsAppClick();
+                  }
                 }}
               >
-                Let's Connect <ArrowRightCircle size={25} />
+                Let's Connect <ArrowRightCircle size={25} aria-hidden="true" />
               </button>
             </div>
           </Col>
@@ -103,10 +116,16 @@ export const Banner = () => {
 
               <img
                 src={git}
-                alt="Git"
-                onClick={() =>
-                  window.open("https://github.com/mahirliy55", "_blank")
-                }
+                alt="GitHub Profile Link"
+                onClick={handleGitClick}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    handleGitClick();
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label="Visit GitHub profile"
                 style={{
                   position: "absolute",
                   bottom: "10px",
