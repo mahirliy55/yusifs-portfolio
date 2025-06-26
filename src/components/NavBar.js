@@ -4,12 +4,14 @@ import logo from "../assets/img/logo.svg";
 import navIcon1 from "../assets/img/nav-icon1.svg";
 import navIcon2 from "../assets/img/nav-icon2.svg";
 import navIcon3 from "../assets/img/nav-icon3.svg";
+import { Moon, Sun } from "react-bootstrap-icons";
 import { HashLink } from "react-router-hash-link";
 import { BrowserRouter as Router } from "react-router-dom";
 
 export const NavBar = () => {
   const [activeLink, setActiveLink] = useState("home");
   const [scrolled, setScrolled] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -24,6 +26,28 @@ export const NavBar = () => {
 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    // Check for saved dark mode preference
+    const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+    setDarkMode(savedDarkMode);
+    
+    if (savedDarkMode) {
+      document.body.classList.add('dark-mode');
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    localStorage.setItem('darkMode', newDarkMode);
+    
+    if (newDarkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  };
 
   const onUpdateActiveLink = (value) => {
     setActiveLink(value);
@@ -92,6 +116,13 @@ export const NavBar = () => {
                   <img src={navIcon3} alt="Instagram" />
                 </a>
               </div>
+              <button 
+                className="dark-mode-toggle"
+                onClick={toggleDarkMode}
+                aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+              </button>
               {/* <HashLink to="#connect">
                 <button className="vvd">
                   <span>Let's Connect</span>
