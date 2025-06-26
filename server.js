@@ -1,52 +1,50 @@
 const express = require("express");
-const router = express.Router();
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 
-// server used to send send emails
 const app = express();
+// Server used to send emails
 app.use(cors());
 app.use(express.json());
-app.use("/", router);
-app.listen(5000, () => console.log("Server Running"));
-console.log(process.env.EMAIL_USER);
-console.log(process.env.EMAIL_PASS);
 
-const contactEmail = nodemailer.createTransport({
-  service: 'gmail',
+let transporter = nodemailer.createTransporter({
+  service: "gmail",
   auth: {
-    user: "********@gmail.com",
-    pass: ""
+    user: "your-email@gmail.com",
+    pass: "your-password",
   },
 });
 
-contactEmail.verify((error) => {
+transporter.verify(function (error, success) {
   if (error) {
     console.log(error);
   } else {
-    console.log("Ready to Send");
+    console.log("Server is ready to take our messages");
   }
 });
 
-router.post("/contact", (req, res) => {
-  const name = req.body.firstName + req.body.lastName;
-  const email = req.body.email;
-  const message = req.body.message;
-  const phone = req.body.phone;
-  const mail = {
+app.post("/send", (req, res) => {
+  let name = req.body.name;
+  let email = req.body.email;
+  let message = req.body.message;
+  let phone = req.body.phone;
+  let mail = {
     from: name,
-    to: "********@gmail.com",
+    to: "your-email@gmail.com",
     subject: "Contact Form Submission - Portfolio",
-    html: `<p>Name: ${name}</p>
-           <p>Email: ${email}</p>
-           <p>Phone: ${phone}</p>
-           <p>Message: ${message}</p>`,
+    html: `Name: ${name}
+           Email: ${email}
+           Phone: ${phone}
+           Message: ${message}`,
   };
-  contactEmail.sendMail(mail, (error) => {
+  transporter.sendMail(mail, (error, data) => {
     if (error) {
-      res.json(error);
+      res.json({ status: "ERROR" });
     } else {
-      res.json({ code: 200, status: "Message Sent" });
+      res.json({ status: "Message sent" });
     }
   });
+});
+app.listen(5000, () => {
+  console.log("Server Running on 5000");
 });
