@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
 import { ProjectCard } from "./ProjectCard";
 import projImg1 from "../assets/img/unisyn.png";
@@ -14,66 +15,98 @@ import TrackVisibility from "react-on-screen";
 import Carousel from "react-bootstrap/Carousel";
 
 export const Projects = () => {
-  const projects = [
-    {
-      title: "Unisyn",
-      description:
-        "I worked as the Frontend Team Lead. I developed both the landing page and the main application from scratch. I contributed to both the design and functionality, actively participating in all stages of the project. Unisyn is an AI-driven commercial lending platform that accelerates modern lending workflows.",
-      imgUrl: projImg1,
-      imgName: "unisyn.png",
-      link: "https://unisyn.global/",
-    },
-    {
-      title: "Ekip.co",
-      description:
-        "A software agency where I had my first experience with Next.js. I developed the landing page and contributed to many of Ekip.co's web and mobile products, working on both design and functionality.",
-      imgUrl: projImg2,
-      imgName: "ekip.svg",
-      link: "https://ekip.co/",
-    },
-    {
-      title: "Vriendly",
-      description:
-        "A VR school startup created during the COVID-19 pandemic. I was responsible for developing engaging animations and successfully delivered all my tasks. My work contributed to creating immersive and interactive user experiences for the platform. ",
-      imgUrl: projImg3,
-      imgName: "vriendly.png",
-      link: "https://www.vriendly.co/",
-    },
-    {
-      title: "Baysart",
-      description:
-        "An e-commerce platform created for the Azerbaijan market, developed for both web and mobile using React Native. I worked as the Team Lead Frontend and Mobile Developer, overseeing the development and delivery of the product across platforms.",
-      imgUrl: projImg4,
-      imgName: "baysart.svg",
-      link: "https://baysart.com/en",
-    },
-    {
-      title: "Hukuka Uygun",
-      description:
-        "Developed with React Native, Hukuka Uygun is one of the top legal real estate platforms in Turkey. I was responsible for the mobile app development, ensuring a seamless and reliable user experience for clients and legal professionals.",
-      imgUrl: projImg5,
-      imgName: "hukuka-uygun.svg",
-      link: "https://hukukauygun.com/",
-    },
-    {
-      title: "Autanate",
-      description:
-        "As the team lead (and still the go-to support guy), I've been at the heart of Autanate—a 'NoCoding' platform that lets you build your own forms and customize parts of your site with ease. If you want your mind blown (or your head to explode from excitement), this is the project to join! For those who love to code, step right up and show us what you've got—Autanate is where the real fun begins. 🤯",
-      imgUrl: projImg6,
-      imgName: "autanate.svg",
-      link: "https://autanate.com/",
-    },
-  ];
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const npmPackages = [
-    {
-      title: "stellar-id ⭐️",
-      description:
-        "A TypeScript library for generating unique, deterministic, star-themed identifiers using real astronomical data. Stellar ID combines cryptography with the beauty of astronomy—every ID includes a real star name, scientific data, and a hash. Perfect for memorable project IDs, user sessions, and more. Featured on npm as a modern, educational, and beautiful solution for unique identifiers.",
-      imgUrl: projImg8,
-      link: "https://www.npmjs.com/package/stellar-id",
-    },
-  ];
+  useEffect(() => {
+    // Simulate loading projects data
+    const loadProjects = async () => {
+      try {
+        setLoading(true);
+        // Simulate API call delay
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        const projectsData = [
+          {
+            title: "Unisyn",
+            description: "A comprehensive platform for managing and synchronizing data across multiple systems. Built with modern web technologies to ensure seamless data flow and real-time updates.",
+            imgUrl: "https://via.placeholder.com/400x300?text=Unisyn",
+            link: "https://unisyn.global/",
+          },
+          {
+            title: "Ekip",
+            description: "An innovative team collaboration tool designed to enhance productivity and streamline communication. Features real-time messaging, task management, and project tracking.",
+            imgUrl: "https://via.placeholder.com/400x300?text=Ekip",
+            link: "https://ekip.co/",
+          },
+          {
+            title: "Vriendly",
+            description: "A social networking platform focused on building meaningful connections. Combines modern UI/UX with advanced algorithms to create engaging user experiences.",
+            imgUrl: "https://via.placeholder.com/400x300?text=Vriendly",
+            link: "https://www.vriendly.co/",
+          },
+          {
+            title: "Stellar ID",
+            description: "A secure identity management system built with blockchain technology. Provides decentralized identity verification and authentication services.",
+            imgUrl: "https://via.placeholder.com/400x300?text=Stellar+ID",
+            link: "https://www.npmjs.com/package/stellar-id",
+          },
+        ];
+        
+        setProjects(projectsData);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error loading projects:", err);
+        setError("Failed to load projects");
+        setLoading(false);
+      }
+    };
+
+    loadProjects();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="project" id="projects">
+        <Container>
+          <Row>
+            <Col size={12}>
+              <TrackVisibility>
+                {({ isVisible }) => (
+                  <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
+                    <h2>Projects</h2>
+                    <p>Loading amazing projects...</p>
+                    <div className="loading-spinner">
+                      <div className="spinner"></div>
+                    </div>
+                  </div>
+                )}
+              </TrackVisibility>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="project" id="projects">
+        <Container>
+          <Row>
+            <Col size={12}>
+              <div className="error-message">
+                <h2>Projects</h2>
+                <p>Error: {error}</p>
+                <button onClick={() => window.location.reload()}>Retry</button>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+    );
+  }
 
   return (
     <section className="project" id="projects">
@@ -82,79 +115,14 @@ export const Projects = () => {
           <Col size={12}>
             <TrackVisibility>
               {({ isVisible }) => (
-                <div
-                  className={
-                    isVisible ? "animate__animated animate__fadeIn" : ""
-                  }
-                >
+                <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                   <h2>Projects</h2>
-
-                  <p>
-                    Here you'll find a selection of my most ambitious and
-                    innovative projects—each one built to solve real-world
-                    problems and push the boundaries of what's possible in web
-                    and mobile development. If you're looking for creativity,
-                    quality, and results, you're in the right place.
-                  </p>
-                  <Carousel interval={null} indicators={false}>
+                  <p>Here are some of my recent projects that showcase my skills and experience.</p>
+                  <Row>
                     {projects.map((project, index) => (
-                      <Carousel.Item key={index}>
-                        <div
-                          className={`animate__animated animate__fadeInRight`}
-                          style={{
-                            animationDelay: `${index * 0.2}s`,
-                            animationDuration: "0.8s",
-                            display: "flex",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <ProjectCard {...project} />
-                        </div>
-                      </Carousel.Item>
+                      <ProjectCard key={index} {...project} />
                     ))}
-                  </Carousel>
-                </div>
-              )}
-            </TrackVisibility>
-          </Col>
-        </Row>
-        <hr />
-        <Row style={{ marginTop: "100px" }}>
-          <Col size={12}>
-            <TrackVisibility>
-              {({ isVisible }) => (
-                <div
-                  className={
-                    isVisible ? "animate__animated animate__fadeIn" : ""
-                  }
-                >
-                  <h2>
-                    My{" "}
-                    <img
-                      src={projImg7}
-                      alt="NPM Packages"
-                      style={{ width: "90px", height: "90px" }}
-                    />{" "}
-                    Packages
-                  </h2>
-
-                  <Carousel interval={null} indicators={false}>
-                    {npmPackages.map((project, index) => (
-                      <Carousel.Item key={index}>
-                        <div
-                          className={`animate__animated animate__fadeInRight`}
-                          style={{
-                            animationDelay: `${index * 0.2}s`,
-                            animationDuration: "0.8s",
-                            display: "flex",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <ProjectCard {...project} />
-                        </div>
-                      </Carousel.Item>
-                    ))}
-                  </Carousel>
+                  </Row>
                 </div>
               )}
             </TrackVisibility>
