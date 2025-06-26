@@ -54,12 +54,12 @@ export const Banner = () => {
 
   return (
     <section className="banner" id="home">
-      <Container>
-        <Row className="aligh-items-center">
-          <Col xs={12} md={6} xl={7}>
-            <div>
+      <Container fluid>
+        <Row className="align-items-center">
+          <Col xs={12} md={6} xl={7} className="banner-text-col">
+            <div className="banner-content">
               <span className="tagline">Welcome to my Portfolio</span>
-              <h1>
+              <h1 className="banner-title">
                 {`Hi! `}{" "}
                 <span
                   className="txt-rotate"
@@ -69,7 +69,7 @@ export const Banner = () => {
                   <span className="wrap">{text}</span>
                 </span>
               </h1>
-              <p>
+              <p className="banner-description">
                 I'm a passionate software developer with over 5 years of
                 experience in web development. I specialize in Next.js and
                 modern JavaScript frameworks, creating responsive and scalable
@@ -78,6 +78,7 @@ export const Banner = () => {
                 exceptional user experiences.
               </p>
               <button
+                className="banner-button"
                 onClick={() => {
                   const phoneNumber = "+34672012922";
                   const message =
@@ -92,13 +93,12 @@ export const Banner = () => {
               </button>
             </div>
           </Col>
-          <Col xs={12} md={6} xl={5} style={{ position: "relative" }}>
-            <div>
+          <Col xs={12} md={6} xl={5} className="banner-image-col">
+            <div className="banner-image-container">
               <img
                 src={avatar}
                 alt="Header Img"
-                className="rounded-circle"
-                style={{ width: "450px", height: "450px", objectFit: "cover" }}
+                className="banner-avatar"
               />
 
               <img
@@ -107,14 +107,7 @@ export const Banner = () => {
                 onClick={() =>
                   window.open("https://github.com/mahirliy55", "_blank")
                 }
-                style={{
-                  position: "absolute",
-                  bottom: "10px",
-                  right: "120px",
-                  width: "90px",
-                  height: "90px",
-                  cursor: "pointer",
-                }}
+                className="banner-git-icon"
               />
             </div>
           </Col>

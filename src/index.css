@@ -11,3 +11,115 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Responsive Banner Styles */
+.banner-content {
+  padding: 20px;
+}
+
+.banner-title {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.banner-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.banner-button {
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.banner-image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.banner-avatar {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.banner-git-icon {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.banner-git-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .banner-title {
+    font-size: 2rem;
+  }
+  
+  .banner-description {
+    font-size: 1rem;
+  }
+  
+  .banner-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+  
+  .banner-avatar {
+    max-width: 300px;
+  }
+  
+  .banner-git-icon {
+    width: 60px;
+    height: 60px;
+    bottom: 10px;
+    right: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .banner-title {
+    font-size: 1.5rem;
+  }
+  
+  .banner-content {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .banner-avatar {
+    max-width: 250px;
+  }
+  
+  .banner-git-icon {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Tablet Responsive */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .banner-title {
+    font-size: 2.5rem;
+  }
+  
+  .banner-avatar {
+    max-width: 350px;
+  }
+}
