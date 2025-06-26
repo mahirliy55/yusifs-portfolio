@@ -12,6 +12,7 @@ export const Banner = () => {
   const [text, setText] = useState("");
   const [delta, setDelta] = useState(300 - Math.random() * 10);
   const [index, setIndex] = useState(1);
+  const [error, setError] = useState(null);
   const toRotate = ["I'm Yusif", "I'm a Software", "And", "Mobile Developer"];
   const period = 1000;
 
@@ -26,31 +27,68 @@ export const Banner = () => {
   }, [text]);
 
   const tick = () => {
-    let i = loopNum % toRotate.length;
-    let fullText = toRotate[i];
-    let updatedText = isDeleting
-      ? fullText.substring(0, text.length - 1)
-      : fullText.substring(0, text.length + 1);
+    try {
+      let i = loopNum % toRotate.length;
+      let fullText = toRotate[i];
+      let updatedText = isDeleting
+        ? fullText.substring(0, text.length - 1)
+        : fullText.substring(0, text.length + 1);
 
-    setText(updatedText);
+      setText(updatedText);
 
-    if (isDeleting) {
-      setDelta((prevDelta) => prevDelta / 2);
-    }
+      if (isDeleting) {
+        setDelta((prevDelta) => prevDelta / 2);
+      }
 
-    if (!isDeleting && updatedText === fullText) {
-      setIsDeleting(true);
-      setIndex((prevIndex) => prevIndex - 1);
-      setDelta(period);
-    } else if (isDeleting && updatedText === "") {
-      setIsDeleting(false);
-      setLoopNum(loopNum + 1);
-      setIndex(1);
-      setDelta(500);
-    } else {
-      setIndex((prevIndex) => prevIndex + 1);
+      if (!isDeleting && updatedText === fullText) {
+        setIsDeleting(true);
+        setIndex((prevIndex) => prevIndex - 1);
+        setDelta(period);
+      } else if (isDeleting && updatedText === "") {
+        setIsDeleting(false);
+        setLoopNum(loopNum + 1);
+        setIndex(1);
+        setDelta(500);
+      } else {
+        setIndex((prevIndex) => prevIndex + 1);
+      }
+    } catch (err) {
+      console.error("Error in tick function:", err);
+      setError("Animation error occurred");
     }
   };
+
+  const handleWhatsAppClick = () => {
+    try {
+      const phoneNumber = "+34672012922";
+      const message = "Hi! I saw your portfolio and I'd like to connect.";
+      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+        message
+      )}`;
+      window.open(whatsappUrl, "_blank");
+    } catch (err) {
+      console.error("Error opening WhatsApp:", err);
+      setError("Failed to open WhatsApp");
+    }
+  };
+
+  const handleGitClick = () => {
+    try {
+      window.open("https://github.com/mahirliy55", "_blank");
+    } catch (err) {
+      console.error("Error opening GitHub:", err);
+      setError("Failed to open GitHub");
+    }
+  };
+
+  if (error) {
+    return (
+      <div className="error-container">
+        <p>Something went wrong: {error}</p>
+        <button onClick={() => setError(null)}>Try Again</button>
+      </div>
+    );
+  }
 
   return (
     <section className="banner" id="home">
@@ -78,15 +116,7 @@ export const Banner = () => {
                 exceptional user experiences.
               </p>
               <button
-                onClick={() => {
-                  const phoneNumber = "+34672012922";
-                  const message =
-                    "Hi! I saw your portfolio and I'd like to connect.";
-                  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-                    message
-                  )}`;
-                  window.open(whatsappUrl, "_blank");
-                }}
+                onClick={handleWhatsAppClick}
               >
                 Let's Connect <ArrowRightCircle size={25} />
               </button>
@@ -99,14 +129,16 @@ export const Banner = () => {
                 alt="Header Img"
                 className="rounded-circle"
                 style={{ width: "450px", height: "450px", objectFit: "cover" }}
+                onError={(e) => {
+                  console.error("Failed to load avatar image");
+                  e.target.style.display = "none";
+                }}
               />
 
               <img
                 src={git}
                 alt="Git"
-                onClick={() =>
-                  window.open("https://github.com/mahirliy55", "_blank")
-                }
+                onClick={handleGitClick}
                 style={{
                   position: "absolute",
                   bottom: "10px",
@@ -114,6 +146,10 @@ export const Banner = () => {
                   width: "90px",
                   height: "90px",
                   cursor: "pointer",
+                }}
+                onError={(e) => {
+                  console.error("Failed to load GitHub icon");
+                  e.target.style.display = "none";
                 }}
               />
             </div>
