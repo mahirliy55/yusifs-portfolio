@@ -1,19 +1,19 @@
 # 🚀 Personal Portfolio Website
 
-Modern ve responsive kişisel portföy web sitesi. React ve modern web teknolojileri kullanılarak geliştirilmiştir.
+Modern and responsive personal portfolio website built with React and modern web technologies.
 
 ![Portfolio Preview](https://user-images.githubusercontent.com/50160672/174933373-1ba6cadf-1c9a-48c3-aa58-984d0bd62d82.png)
 
-## ✨ Özellikler
+## ✨ Features
 
-- 🎨 **Modern UI/UX Design** - Temiz ve profesyonel tasarım
-- 📱 **Fully Responsive** - Tüm cihazlarda mükemmel görünüm
-- ⚡ **Performance Optimized** - Hızlı yükleme ve smooth animasyonlar
-- 🎯 **Interactive Elements** - Mouse trail animasyonu ve interaktif bileşenler
-- 🌐 **SEO Friendly** - Arama motorları için optimize edilmiş
-- 📧 **Contact Integration** - WhatsApp ve email entegrasyonu
+- 🎨 **Modern UI/UX Design** - Clean and professional design
+- 📱 **Fully Responsive** - Perfect appearance on all devices
+- ⚡ **Performance Optimized** - Fast loading and smooth animations
+- 🎯 **Interactive Elements** - Mouse trail animation and interactive components
+- 🌐 **SEO Friendly** - Optimized for search engines
+- 📧 **Contact Integration** - WhatsApp and email integration
 
-## 🛠️ Teknolojiler
+## 🛠️ Technologies
 
 - **Frontend Framework:** React 18
 - **UI Library:** React Bootstrap
@@ -22,120 +22,120 @@ Modern ve responsive kişisel portföy web sitesi. React ve modern web teknoloji
 - **Build Tool:** Create React App
 - **Version Control:** Git
 
-## 🚀 Kurulum
+## 🚀 Installation
 
-Projeyi yerel makinenizde çalıştırmak için:
+To run the project on your local machine:
 
 ```bash
-# Repository'yi klonlayın
+# Clone the repository
 git clone https://github.com/yourusername/personal-portfolio.git
 
-# Proje dizinine gidin
+# Navigate to project directory
 cd personal-portfolio
 
-# Bağımlılıkları yükleyin
+# Install dependencies
 npm install
 
-# Geliştirme sunucusunu başlatın
+# Start development server
 npm start
 ```
 
-Tarayıcınızda [http://localhost:3000](http://localhost:3000) adresini açın.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 📁 Proje Yapısı
+## 📁 Project Structure
 
 ```
 personal-portfolio/
-├── public/                 # Statik dosyalar
+├── public/                 # Static files
 ├── src/
-│   ├── components/         # React bileşenleri
-│   │   ├── Banner.js      # Ana banner bölümü
-│   │   ├── NavBar.js      # Navigasyon menüsü
-│   │   ├── Projects.js    # Projeler bölümü
-│   │   ├── Skills.js      # Yetenekler bölümü
-│   │   ├── Contact.js     # İletişim bölümü
-│   │   └── Footer.js      # Alt bilgi
-│   ├── assets/            # Resimler ve fontlar
-│   ├── cursor-trail.js    # Mouse trail animasyonu
-│   ├── App.js            # Ana uygulama bileşeni
-│   └── index.js          # Giriş noktası
+│   ├── components/         # React components
+│   │   ├── Banner.js      # Main banner section
+│   │   ├── NavBar.js      # Navigation menu
+│   │   ├── Projects.js    # Projects section
+│   │   ├── Skills.js      # Skills section
+│   │   ├── Contact.js     # Contact section
+│   │   └── Footer.js      # Footer
+│   ├── assets/            # Images and fonts
+│   ├── cursor-trail.js    # Mouse trail animation
+│   ├── App.js            # Main application component
+│   └── index.js          # Entry point
 ├── package.json
 └── README.md
 ```
 
-## 🎯 Kullanılabilir Scriptler
+## 🎯 Available Scripts
 
 ### `npm start`
-Geliştirme modunda uygulamayı çalıştırır.\
-[http://localhost:3000](http://localhost:3000) adresinde görüntüleyebilirsiniz.
+Runs the app in development mode.\
+You can view it at [http://localhost:3000](http://localhost:3000).
 
 ### `npm test`
-Test runner'ı interaktif watch modunda başlatır.
+Launches the test runner in interactive watch mode.
 
 ### `npm run build`
-Uygulamayı production için `build` klasörüne derler.\
-En iyi performans için optimize edilmiş production build'i oluşturur.
+Builds the app for production to the `build` folder.\
+Creates an optimized production build for best performance.
 
 ### `npm run eject`
-**Not:** Bu işlem geri alınamaz!\
-Create React App konfigürasyonunu özelleştirmek için kullanılır.
+**Note:** This is a one-way operation!\
+Used to customize Create React App configuration.
 
-## 🎨 Animasyonlar
+## 🎨 Animations
 
 ### Mouse Trail Animation
-- Mouse'un arkasında renkli parçacıklar bırakan interaktif animasyon
-- Canvas API kullanılarak performanslı şekilde çalışır
-- Mavi-mor tonlarında dinamik parçacık sistemi
+- Interactive animation that leaves colorful particles behind the mouse
+- Works performantly using Canvas API
+- Dynamic particle system with blue-purple tones
 
 ### Smooth Transitions
-- Sayfa geçişlerinde yumuşak animasyonlar
-- Hover efektleri ve micro-interactions
-- Responsive animasyonlar
+- Smooth animations on page transitions
+- Hover effects and micro-interactions
+- Responsive animations
 
 ## 📱 Responsive Design
 
-- **Desktop:** 1200px ve üzeri
+- **Desktop:** 1200px and above
 - **Tablet:** 768px - 1199px
-- **Mobile:** 767px ve altı
+- **Mobile:** 767px and below
 
-## 🔧 Özelleştirme
+## 🔧 Customization
 
-### Renkler
-Ana renk paletini değiştirmek için `src/index.css` dosyasındaki CSS değişkenlerini düzenleyin.
+### Colors
+Edit CSS variables in `src/index.css` file to change the main color palette.
 
-### İçerik
-Bileşen dosyalarını düzenleyerek kişisel bilgilerinizi güncelleyin:
-- `Banner.js` - Ana tanıtım metni
-- `Projects.js` - Proje bilgileri
-- `Skills.js` - Yetenekler
-- `Contact.js` - İletişim bilgileri
+### Content
+Update your personal information by editing component files:
+- `Banner.js` - Main introduction text
+- `Projects.js` - Project information
+- `Skills.js` - Skills
+- `Contact.js` - Contact information
 
-## 📧 İletişim
+## 📧 Contact
 
 - **Email:** your.email@example.com
-- **LinkedIn:** [LinkedIn Profili](https://linkedin.com/in/yourprofile)
-- **GitHub:** [GitHub Profili](https://github.com/yourusername)
+- **LinkedIn:** [LinkedIn Profile](https://linkedin.com/in/yourprofile)
+- **GitHub:** [GitHub Profile](https://github.com/yourusername)
 - **WhatsApp:** +90 XXX XXX XX XX
 
-## 🤝 Katkıda Bulunma
+## 🤝 Contributing
 
-1. Bu repository'yi fork edin
-2. Feature branch oluşturun (`git checkout -b feature/AmazingFeature`)
-3. Değişikliklerinizi commit edin (`git commit -m 'Add some AmazingFeature'`)
-4. Branch'inizi push edin (`git push origin feature/AmazingFeature`)
-5. Pull Request oluşturun
+1. Fork this repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Create a Pull Request
 
-## 📄 Lisans
+## 📄 License
 
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için `LICENSE` dosyasına bakın.
+This project is licensed under the MIT License. See the `LICENSE` file for details.
 
-## 🙏 Teşekkürler
+## 🙏 Acknowledgments
 
-- [Create React App](https://github.com/facebook/create-react-app) - React projesi oluşturma
-- [React Bootstrap](https://react-bootstrap.github.io/) - UI bileşenleri
-- [Animate.css](https://animate.style/) - CSS animasyonları
-- [React Icons](https://react-icons.github.io/react-icons/) - İkonlar
+- [Create React App](https://github.com/facebook/create-react-app) - React project creation
+- [React Bootstrap](https://react-bootstrap.github.io/) - UI components
+- [Animate.css](https://animate.style/) - CSS animations
+- [React Icons](https://react-icons.github.io/react-icons/) - Icons
 
 ---
 
-⭐ Bu projeyi beğendiyseniz yıldız vermeyi unutmayın!
+⭐ Don't forget to give this project a star if you liked it!
