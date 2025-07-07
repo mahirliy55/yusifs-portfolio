@@ -2,49 +2,83 @@ const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 
-const app = express();
-// Server used to send emails
-app.use(cors());
-app.use(express.json());
+/**
+ * Express server configuration for handling portfolio contact form emails
+ * Features CORS support and nodemailer integration for email sending
+ */
 
-let transporter = nodemailer.createTransporter({
-  service: "gmail",
+// Server used to send emails
+const app = express();
+const PORT = 5000;
+
+// Middleware configuration
+app.use(cors()); // Enable Cross-Origin Resource Sharing
+app.use(express.json()); // Parse JSON request bodies
+
+/**
+ * Email transporter configuration using nodemailer
+ * Uses Gmail SMTP service with app-specific password
+ */
+const contactEmail = nodemailer.createTransporter({
+  service: 'gmail',
   auth: {
-    user: "your-email@gmail.com",
-    pass: "your-password",
+    user: "noreplyyusif@gmail.com", // Sender email address
+    pass: "" // App-specific password (should be in environment variables)
   },
 });
 
-transporter.verify(function (error, success) {
+/**
+ * Verify email transporter connection on server startup
+ */
+contactEmail.verify((error) => {
   if (error) {
-    console.log(error);
+    console.log("Email service error:", error);
   } else {
-    console.log("Server is ready to take our messages");
+    console.log("Ready to Send emails");
   }
 });
 
-app.post("/send", (req, res) => {
-  let name = req.body.name;
-  let email = req.body.email;
-  let message = req.body.message;
-  let phone = req.body.phone;
-  let mail = {
+/**
+ * POST /contact - Handle contact form submissions
+ * Sends email using provided form data and returns status response
+ */
+app.post("/contact", (req, res) => {
+  // Extract form data from request body
+  const name = req.body.firstName + " " + req.body.lastName;
+  const email = req.body.email;
+  const message = req.body.message;
+  const phone = req.body.phone;
+  
+  // Construct email content
+  const mail = {
     from: name,
-    to: "your-email@gmail.com",
-    subject: "Contact Form Submission - Portfolio",
-    html: `Name: ${name}
-           Email: ${email}
-           Phone: ${phone}
-           Message: ${message}`,
+    to: "noreplyyusif@gmail.com", // Recipient email address
+    subject: "Contact Form Submission - Portfolio Website",
+    html: `
+      <h3>New Contact Form Submission</h3>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Message:</strong></p>
+      <p>${message}</p>
+    `,
   };
-  transporter.sendMail(mail, (error, data) => {
+  
+  // Send email and handle response
+  contactEmail.sendMail(mail, (error) => {
     if (error) {
-      res.json({ status: "ERROR" });
+      console.log("Error sending email:", error);
+      res.json({ code: 500, status: "Message sending failed" });
     } else {
-      res.json({ status: "Message sent" });
+      console.log("Email sent successfully");
+      res.json({ code: 200, status: "Message sent successfully" });
     }
   });
 });
-app.listen(5000, () => {
-  console.log("Server Running on 5000");
+
+/**
+ * Start the server on specified port
+ */
+app.listen(PORT, () => {
+  console.log(`Server Running on http://localhost:${PORT}`);
 });

@@ -15,6 +15,7 @@ export const ProjectCard = ({ title, description, imgUrl, link, imgName }) => {
         >
           <img
             src={imgUrl}
+            alt={title}
             className=""
             style={{
               height: "100%",

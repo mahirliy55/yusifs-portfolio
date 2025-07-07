@@ -1,4 +1,4 @@
-import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { ProjectCard } from "./ProjectCard";
 import projImg1 from "../assets/img/unisyn.png";
 import projImg2 from "../assets/img/ekip.svg";
@@ -8,12 +8,18 @@ import projImg5 from "../assets/img/logowhite.png";
 import projImg6 from "../assets/img/autanate.svg";
 import projImg7 from "../assets/img/npm.svg";
 import projImg8 from "../assets/img/stellar.png";
+import projImg9 from "../assets/img/keyboard.png";
 import colorSharp2 from "../assets/img/color-sharp2.png";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
 import Carousel from "react-bootstrap/Carousel";
 
+/**
+ * Projects component displays a showcase of professional projects and npm packages
+ * Features animated carousels and responsive design for different screen sizes
+ */
 export const Projects = () => {
+  // Main professional projects array with detailed descriptions
   const projects = [
     {
       title: "Unisyn",
@@ -65,12 +71,20 @@ export const Projects = () => {
     },
   ];
 
+  // NPM packages array showcasing open-source contributions
   const npmPackages = [
     {
       title: "stellar-id ⭐️",
       description:
         "A TypeScript library for generating unique, deterministic, star-themed identifiers using real astronomical data. Stellar ID combines cryptography with the beauty of astronomy—every ID includes a real star name, scientific data, and a hash. Perfect for memorable project IDs, user sessions, and more. Featured on npm as a modern, educational, and beautiful solution for unique identifiers.",
       imgUrl: projImg8,
+      link: "https://www.npmjs.com/package/stellar-id",
+    },
+    {
+      title: "stellar-id ⭐️",
+      description:
+        "A TypeScript library for generating unique, deterministic, star-themed identifiers using real astronomical data. Stellar ID combines cryptography with the beauty of astronomy—every ID includes a real star name, scientific data, and a hash. Perfect for memorable project IDs, user sessions, and more. Featured on npm as a modern, educational, and beautiful solution for unique identifiers.",
+      imgUrl: projImg9,
       link: "https://www.npmjs.com/package/stellar-id",
     },
   ];
@@ -96,13 +110,14 @@ export const Projects = () => {
                     and mobile development. If you're looking for creativity,
                     quality, and results, you're in the right place.
                   </p>
+                  {/* Projects carousel with custom animation delays for smooth entrance effects */}
                   <Carousel interval={null} indicators={false}>
                     {projects.map((project, index) => (
                       <Carousel.Item key={index}>
                         <div
                           className={`animate__animated animate__fadeInRight`}
                           style={{
-                            animationDelay: `${index * 0.2}s`,
+                            animationDelay: `${index * 0.2}s`, // Staggered animation for visual appeal
                             animationDuration: "0.8s",
                             display: "flex",
                             justifyContent: "center",
@@ -118,7 +133,11 @@ export const Projects = () => {
             </TrackVisibility>
           </Col>
         </Row>
+        
+        {/* Separator between projects and npm packages */}
         <hr />
+        
+        {/* NPM Packages section showcasing open-source contributions */}
         <Row style={{ marginTop: "100px" }}>
           <Col size={12}>
             <TrackVisibility>
@@ -138,6 +157,7 @@ export const Projects = () => {
                     Packages
                   </h2>
 
+                  {/* NPM packages carousel */}
                   <Carousel interval={null} indicators={false}>
                     {npmPackages.map((project, index) => (
                       <Carousel.Item key={index}>
@@ -161,7 +181,8 @@ export const Projects = () => {
           </Col>
         </Row>
       </Container>
-      <img className="background-image-right" src={colorSharp2}></img>
+      {/* Background decoration image positioned on the right */}
+      <img className="background-image-right" src={colorSharp2} alt="Background decoration"></img>
     </section>
   );
 };

@@ -7,9 +7,20 @@ import navIcon3 from "../assets/img/nav-icon3.svg";
 import { HashLink } from "react-router-hash-link";
 import { BrowserRouter as Router } from "react-router-dom";
 
-export const NavBar = ({ activeLink, setActiveLink }) => {
+/**
+ * Navigation bar component with smooth scrolling and responsive design
+ * Features social media links, dynamic styling, and mobile-friendly collapse menu
+ */
+export const NavBar = () => {
+  // State for tracking active navigation link
+  const [activeLink, setActiveLink] = useState('home');
+  // State for tracking scroll position to apply background styling
   const [scrolled, setScrolled] = useState(false);
 
+  /**
+   * Effect hook to handle scroll event for navbar background change
+   * Adds/removes 'scrolled' class based on scroll position
+   */
   useEffect(() => {
     const onScroll = () => {
       if (window.scrollY > 50) {
@@ -17,108 +28,81 @@ export const NavBar = ({ activeLink, setActiveLink }) => {
       } else {
         setScrolled(false);
       }
-    };
+    }
 
     window.addEventListener("scroll", onScroll);
 
+    // Cleanup event listener on component unmount
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [])
 
+  /**
+   * Updates active link state when navigation item is clicked
+   * @param {string} value - The value of the clicked navigation link
+   */
   const onUpdateActiveLink = (value) => {
     setActiveLink(value);
-  };
-
-  const handleNavClick = (link) => {
-    onUpdateActiveLink(link);
-    const element = document.getElementById(link);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  }
 
   return (
     <Router>
       <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
         <Container>
-          <Navbar.Brand href="#home" aria-label="Portfolio Home">
-            <img src={logo} alt="Portfolio Logo" />
-          </Navbar.Brand>
-          <Navbar.Toggle 
-            aria-controls="basic-navbar-nav"
-            aria-label="Toggle navigation menu"
-          >
+          {/* Brand logo */}
+      
+          
+          {/* Mobile menu toggle button */}
+          <Navbar.Toggle aria-controls="basic-navbar-nav">
             <span className="navbar-toggler-icon"></span>
           </Navbar.Toggle>
+          
+          {/* Collapsible navigation content */}
           <Navbar.Collapse id="basic-navbar-nav">
+            {/* Main navigation links */}
             <Nav className="ms-auto">
               <Nav.Link 
                 href="#home" 
-                className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'}
-                onClick={() => handleNavClick('home')}
-                aria-label="Navigate to home section"
-                aria-current={activeLink === 'home' ? 'page' : undefined}
+                className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} 
+                onClick={() => onUpdateActiveLink('home')}
               >
                 Home
               </Nav.Link>
               <Nav.Link 
                 href="#skills" 
-                className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'}
-                onClick={() => handleNavClick('skills')}
-                aria-label="Navigate to skills section"
-                aria-current={activeLink === 'skills' ? 'page' : undefined}
+                className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'} 
+                onClick={() => onUpdateActiveLink('skills')}
               >
                 Skills
               </Nav.Link>
               <Nav.Link 
                 href="#projects" 
-                className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'}
-                onClick={() => handleNavClick('projects')}
-                aria-label="Navigate to projects section"
-                aria-current={activeLink === 'projects' ? 'page' : undefined}
+                className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'} 
+                onClick={() => onUpdateActiveLink('projects')}
               >
                 Projects
               </Nav.Link>
             </Nav>
+            
+            {/* Social media icons and connect button */}
             <span className="navbar-text">
               <div className="social-icon">
-                <a 
-                  href="https://www.linkedin.com/in/your-profile" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  aria-label="Visit LinkedIn profile"
-                >
-                  <img src={navIcon1} alt="LinkedIn" />
+                <a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer">
+                  <img src={navIcon1} alt="LinkedIn Profile" />
+                </a>
+                <a href="https://www.facebook.com/your-profile" target="_blank" rel="noopener noreferrer">
+                  <img src={navIcon2} alt="Facebook Profile" />
+                </a>
+                <a href="https://www.instagram.com/your-profile" target="_blank" rel="noopener noreferrer">
+                  <img src={navIcon3} alt="Instagram Profile" />
                 </a>
               </div>
-              <div className="social-icon">
-                <a 
-                  href="https://github.com/your-username" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  aria-label="Visit GitHub profile"
-                >
-                  <img src={navIcon2} alt="GitHub" />
-                </a>
-              </div>
-              <div className="social-icon">
-                <a 
-                  href="mailto:your-email@example.com"
-                  aria-label="Send email"
-                >
-                  <img src={navIcon3} alt="Email" />
-                </a>
-              </div>
-              <button 
-                className="vvd" 
-                onClick={() => handleNavClick('connect')}
-                aria-label="Navigate to contact section"
-              >
-                <span>Let's Connect</span>
-              </button>
+              
+              {/* Connect button with smooth scroll to contact section */}
+      
             </span>
           </Navbar.Collapse>
         </Container>
       </Navbar>
     </Router>
-  );
-};
+  )
+}
