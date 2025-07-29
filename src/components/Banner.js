@@ -17,7 +17,6 @@ export const Banner = memo(() => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState("");
   const [delta, setDelta] = useState(300 - Math.random() * 10);
-  const [index, setIndex] = useState(1);
 
   // Array of texts to rotate through in typewriter animation
   const toRotate = ["I'm Yusif", "I'm a Software", "And", "Mobile Developer"];
@@ -44,17 +43,13 @@ export const Banner = memo(() => {
     // Handle text completion and start deletion
     if (!isDeleting && updatedText === fullText) {
       setIsDeleting(true);
-      setIndex((prevIndex) => prevIndex - 1);
       setDelta(period);
     }
     // Handle deletion completion and move to next text
     else if (isDeleting && updatedText === "") {
       setIsDeleting(false);
       setLoopNum(loopNum + 1);
-      setIndex(1);
       setDelta(500);
-    } else {
-      setIndex((prevIndex) => prevIndex + 1);
     }
   }, [loopNum, isDeleting, text.length, toRotate, period]);
 
@@ -143,11 +138,7 @@ export const Banner = memo(() => {
           <Col xs={12} md={6} xl={5}>
             <TrackVisibility>
               {({ isVisible }) => (
-                <div
-                  className={
-                    isVisible ? "animate__animated animate__zoomIn" : ""
-                  }
-                >
+                <div style={{ position: "relative" }}>
                   <img
                     src={avatar}
                     alt="Yusif Jabrayilov - Software Developer"
