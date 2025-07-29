@@ -8,7 +8,7 @@ import projImg5 from "../assets/img/logowhite.png";
 import projImg6 from "../assets/img/autanate.svg";
 import projImg7 from "../assets/img/npm.svg";
 import projImg8 from "../assets/img/stellar.png";
-import projImg9 from "../assets/img/keyboard.png";
+import projImg9 from "../assets/img/keyboard1.png";
 import colorSharp2 from "../assets/img/color-sharp2.png";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
@@ -81,11 +81,11 @@ export const Projects = () => {
       link: "https://www.npmjs.com/package/stellar-id",
     },
     {
-      title: "stellar-id ⭐️",
+      title: "keyboard-heatmap 🎹",
       description:
-        "A TypeScript library for generating unique, deterministic, star-themed identifiers using real astronomical data. Stellar ID combines cryptography with the beauty of astronomy—every ID includes a real star name, scientific data, and a hash. Perfect for memorable project IDs, user sessions, and more. Featured on npm as a modern, educational, and beautiful solution for unique identifiers.",
+        "A beautiful, lightweight TypeScript package for tracking keyboard usage and generating stunning heatmap visualizations",
       imgUrl: projImg9,
-      link: "https://www.npmjs.com/package/stellar-id",
+      link: "https://www.npmjs.com/package/keyboard-heatmap",
     },
   ];
 
@@ -133,10 +133,10 @@ export const Projects = () => {
             </TrackVisibility>
           </Col>
         </Row>
-        
+
         {/* Separator between projects and npm packages */}
         <hr />
-        
+
         {/* NPM Packages section showcasing open-source contributions */}
         <Row style={{ marginTop: "100px" }}>
           <Col size={12}>
@@ -182,7 +182,11 @@ export const Projects = () => {
         </Row>
       </Container>
       {/* Background decoration image positioned on the right */}
-      <img className="background-image-right" src={colorSharp2} alt="Background decoration"></img>
+      <img
+        className="background-image-right"
+        src={colorSharp2}
+        alt="Background decoration"
+      ></img>
     </section>
   );
 };
