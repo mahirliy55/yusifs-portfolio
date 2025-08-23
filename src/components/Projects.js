@@ -9,6 +9,7 @@ import projImg6 from "../assets/img/autanate.svg";
 import projImg7 from "../assets/img/npm.svg";
 import projImg8 from "../assets/img/stellar.png";
 import projImg9 from "../assets/img/keyboard1.png";
+import projImg10 from "../assets/img/safecircle.png";
 import colorSharp2 from "../assets/img/color-sharp2.png";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
@@ -68,6 +69,14 @@ export const Projects = () => {
       imgUrl: projImg6,
       imgName: "autanate.svg",
       link: "https://autanate.com/",
+    },
+    {
+      title: "SafeCircle",
+      description:
+        "SafeCircle is a product we developed entirely in-house at Quberts, built from the ground up. I was actively involved in every stage of the process, from ideation to launch. With its user-centered design and robust technical infrastructure, it stands as a unique security solution with no equivalent worldwide.",
+      imgUrl: projImg10,
+      imgName: "safecircle.png",
+      link: "https://safecircle.quberts.com/",
     },
   ];
 
