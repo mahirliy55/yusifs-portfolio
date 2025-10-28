@@ -10,6 +10,7 @@ import projImg7 from "../assets/img/npm.svg";
 import projImg8 from "../assets/img/stellar.png";
 import projImg9 from "../assets/img/keyboard1.png";
 import projImg10 from "../assets/img/safecircle.png";
+import projImg11 from "../assets/img/typerly.png";
 import colorSharp2 from "../assets/img/color-sharp2.png";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
@@ -95,6 +96,13 @@ export const Projects = () => {
         "A beautiful, lightweight TypeScript package for tracking keyboard usage and generating stunning heatmap visualizations",
       imgUrl: projImg9,
       link: "https://www.npmjs.com/package/keyboard-heatmap",
+    },
+    {
+      title: "typerly",
+      description:
+        "typerly is a modern, zero-dependency React component for creating smooth and elegant typewriter animations. Built entirely with TypeScript, it provides full type safety and a minimal API that makes it effortless to integrate into any React project.",
+      imgUrl: projImg11,
+      link: "https://www.npmjs.com/package/typerly#-live-demo",
     },
   ];
 
